@@ -2,14 +2,56 @@
 @model RemoteMusicController.Pages.IndexModel
 <p>Media Controller</p>
 <form id="MainForm" method="post">
-    <input type="hidden" name="ButtonType" value=""/>
+    <input type="hidden" name="ButtonType" value="" />
     @Html.AntiForgeryToken()
 </form>
-<input type="button" onclick="SetButton('Play/Pause')" value="Play/Pause"/>
-<input type="button" onclick="SetButton('Volume Up')" value="Volume Up" />
-<input type="button" onclick="SetButton('Volume Down')" value="Volume Down" />
-<input type="button" onclick="SetButton('Next')" value="Next" />
-<input type="button" onclick="SetButton('Prev')" value="Prev" />
+<style>
+    #centerLayer {
+        position: absolute; /* Абсолютное позиционирование */
+        top: 40%; /* Положение слоя от верхнего края */
+        margin-left: 1%; /* Отступ слева */
+        padding: 10px; /* Поля вокруг текста */
+    }
+
+    input[type=button] {
+        display: inline-block;
+        font-weight: bold;
+        color: #fff;
+        width: 100%;
+        text-decoration: none;
+        text-shadow: 0 -1px rgba(0,0,0,.5);
+        user-select: none;
+        margin: 50 5 5 5;
+        padding: .7em 1.5em;
+        border: 1px solid rgb(80,32,0);
+        border-radius: 5px;
+        outline: none;
+        background: rgb(147,80,36) linear-gradient(rgb(106,58,26), rgb(147,80,36) 80%);
+        box-shadow: 0 6px rgb(86,38,6), 0 3px 15px rgba(0,0,0,.4), inset 0 1px rgba(255,255,255,.3), inset 0 0 3px rgba(255,255,255,.5);
+        transition: .2s;
+    }
+
+        input[type=button]:hover {
+            background: rgb(167,91,41) linear-gradient(rgb(126,69,31), rgb(167,91,41) 80%);
+        }
+
+        input[type=button]:active {
+            background: rgb(120,63,25) linear-gradient(rgb(120,63,25) 20%, rgb(167,91,41));
+            box-shadow: 0 2px rgb(86,38,6), 0 1px 6px rgba(0,0,0,.4), inset 0 1px rgba(255,255,255,.3), inset 0 0 3px rgba(255,255,255,.5);
+            -webkit-transform: translate(0, 4px);
+            transform: translate(0, 4px);
+        }
+</style>
+<body>
+
+    <input type="button" onclick="SetButton('Play/Pause')" value="Play/Pause" />
+    <input type="button" onclick="SetButton('Volume Up')" value="Volume Up" />
+    <input type="button" onclick="SetButton('Volume Down')" value="Volume Down" />
+    <input type="button" onclick="SetButton('Prev')" value="Prev" />
+    <input type="button" onclick="SetButton('Next')" value="Next" />
+    <div id="centerLayer">
+    </div>
+</body>
 <script>
     function SetButton(name) {
         document.getElementsByName('ButtonType')[0].setAttribute('value', name);

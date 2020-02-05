@@ -5,33 +5,44 @@ using System.Threading.Tasks;
 
 namespace RemoteMusicController
 {
-    public class KeyBoardSimulator
+    public static class KeyBoardSimulator
     {
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         public static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, uint dwExtraInfo);
-        public static void PressButton()
+        public static void PressButton(byte code)
         {
-            const int VK_VOLUME_UP = 0xAF;
-            const int VK_SPACE = 0x20;
-            const int VK_MEDIA_PLAY_PAUSE = 0xB3;
-            const int VK_VOLUME_DOWN = 0xAE;
             const uint KEYEVENTF_EXTENDEDKEY = 0x0001;
-            for (int i = 0; i < 10; i++)
-            {
-                keybd_event((byte)VK_MEDIA_PLAY_PAUSE, 0, KEYEVENTF_EXTENDEDKEY | 0, 0);
-                System.Threading.Thread.Sleep(1000);
-            }
+            keybd_event(code, 0, KEYEVENTF_EXTENDEDKEY | 0, 0);
         }
     }
     public class KButton
     {
-        public string Name { get; private set; }
-        public byte Code { get; private set; } 
-        public KButton(string Name,int Code)
+
+        public Button Button { get; private set; }
+        public byte Code { get; private set; }
+        public KButton(Button Button, int Code)
         {
-            this.Name = Name;
+            this.Button = Button;
             this.Code = (byte)Code;
         }
+        public void Press()
+        {
+            KeyBoardSimulator.PressButton(Code);
+        }
+        public static List<KButton> List { get; } = new List<KButton> { 
+            new KButton(Button.Play_Pause, (byte)0xB3), 
+            new KButton(Button.VolumeUp, (byte)0xAF), 
+            new KButton(Button.VolumeDown, (byte)0xAE), 
+            new KButton(Button.Next, (byte)0xB0), 
+            new KButton(Button.Prev, (byte)0xB1) };
 
+    }
+    public enum Button
+    {
+        Play_Pause,
+        VolumeUp,
+        VolumeDown,
+        Next,
+        Prev,
     }
 }

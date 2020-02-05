@@ -15,18 +15,18 @@ namespace RemoteMusicController.Pages
         {
             Message = "Введите сумму";
         }
-        public void OnPost(int? sum,string? ButtonType)
+        public void OnPost(string? ButtonType)
         {
-            if (sum == null || sum < 1000)
-            {
-                Message = "Передана некорректная сумма. Повторите ввод";
-            }
-            else
-            {
-                decimal result = sum.Value / currentRate;
-                // ToString("F2") - форматирование числа: F2 - дробное число с 2 знаками после запятой
-                Message = $"При обмене {sum} рублей вы получите {result.ToString("F2")}$.";
-            }
+            if(ButtonType== "Play/Pause")
+                KButton.List.FirstOrDefault(x => x.Button == Button.Play_Pause).Press(); ;
+            if (ButtonType == "Volume Up")
+                KButton.List.FirstOrDefault(x => x.Button == Button.VolumeUp).Press(); ;
+            if (ButtonType == "Volume Down")
+                KButton.List.FirstOrDefault(x => x.Button == Button.VolumeDown).Press();
+            if (ButtonType == "Next")
+                KButton.List.FirstOrDefault(x => x.Button == Button.Next).Press();
+            if (ButtonType == "Prev")
+                KButton.List.FirstOrDefault(x => x.Button == Button.Prev).Press();
         }
     }
 }
