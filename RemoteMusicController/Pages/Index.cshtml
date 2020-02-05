@@ -1,14 +1,15 @@
 ﻿@page
 @model RemoteMusicController.Pages.IndexModel
-<p>Hello from Razor pages</p>
-<h2>@Model.Message</h2>
+<p>Media Controller</p>
 <form id="MainForm" method="post">
     <input type="hidden" name="ButtonType" value=""/>
-    <input type="number" name="sum" />
-    <input type="submit" value="Send" />
-    @Html.AntiForgeryToken();
+    @Html.AntiForgeryToken()
 </form>
 <input type="button" onclick="SetButton('Play/Pause')" value="Play/Pause"/>
+<input type="button" onclick="SetButton('Volume Up')" value="Volume Up" />
+<input type="button" onclick="SetButton('Volume Down')" value="Volume Down" />
+<input type="button" onclick="SetButton('Next')" value="Next" />
+<input type="button" onclick="SetButton('Prev')" value="Prev" />
 <script>
     function SetButton(name) {
         document.getElementsByName('ButtonType')[0].setAttribute('value', name);
