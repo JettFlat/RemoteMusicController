@@ -1,62 +1,148 @@
 ﻿@page
 @model RemoteMusicController.Pages.IndexModel
-<p>Media Controller</p>
 <form id="MainForm" method="post">
-    <input type="hidden" name="ButtonType" value="" />
-    @Html.AntiForgeryToken()
+	<input type="hidden" name="ButtonType" value="" />
+	@Html.AntiForgeryToken()
 </form>
 <style>
-    #centerLayer {
-        position: absolute; /* Абсолютное позиционирование */
-        top: 40%; /* Положение слоя от верхнего края */
-        margin-left: 1%; /* Отступ слева */
-        padding: 10px; /* Поля вокруг текста */
-    }
+	.card {
+		background: #fff;
+		border-radius: 16px;
+		margin-top: 20px;
+		width: 100%;
+		text-align: center;
+		box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	}
+	@@media screen and (orientation: landscape) {
+		.card {
+			width: 500px;
+			height: wid
+		}
+	}
+	@@media screen and (orientation: portrait) {
 
-    input[type=button] {
-        display: inline-block;
-        font-weight: bold;
-        font-size: 200%;
-        color: #fff;
-        width: 100%;
-        height: 10%;
-        text-decoration: none;
-        text-shadow: 0 -1px rgba(0,0,0,.5);
-        user-select: none;
-        margin: 70 5 5 5;
-        padding: .7em 1.5em;
-        border: 1px solid rgb(80,32,0);
-        border-radius: 5px;
-        outline: none;
-        background: rgb(147,80,36) linear-gradient(rgb(106,58,26), rgb(147,80,36) 80%);
-        box-shadow: 0 6px rgb(86,38,6), 0 3px 15px rgba(0,0,0,.4), inset 0 1px rgba(255,255,255,.3), inset 0 0 3px rgba(255,255,255,.5);
-        transition: .2s;
-    }
+	}
+	.card-1 {
+		padding: 10px 10px 10px 10px;
+	}
+	.card-4 {
+		padding: 30px 30px 30px 30px;
+	}
+	body {
+		padding: 5px 5px 5px 5px;
+		text-align: center;
+		font-family: 'Ubuntu', sans-serif;
+	}
+	.btn {
+		position: relative;
+		width: 100%;
+		height: 10%;
+		margin-top: 20px;
+		display: block;
+		padding: 0;
 
-        input[type=button]:hover {
-            background: rgb(167,91,41) linear-gradient(rgb(126,69,31), rgb(167,91,41) 80%);
-        }
+		overflow: hidden;
 
-        input[type=button]:active {
-            background: rgb(120,63,25) linear-gradient(rgb(120,63,25) 20%, rgb(167,91,41));
-            box-shadow: 0 2px rgb(86,38,6), 0 1px 6px rgba(0,0,0,.4), inset 0 1px rgba(255,255,255,.3), inset 0 0 3px rgba(255,255,255,.5);
-            -webkit-transform: translate(0, 4px);
-            transform: translate(0, 4px);
-        }
+		border-width: 0;
+		outline: none;
+		border-radius: 10px;
+		box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+
+		background-color: #2ecc71;
+		color: #ecf0f1;
+
+		transition: background-color .3s;
+	}
+
+	.btn:hover, .btn:focus {
+		background-color: #27ae60;
+	}
+
+	.btn > * {
+		position: relative;
+	}
+
+	.btn span {
+		display: block;
+		padding: 12px 24px;
+	}
+
+	.btn:before {
+		content: "";
+
+		position: absolute;
+		top: 50%;
+		left: 50%;
+
+		display: block;
+		width: 0;
+		padding-top: 0;
+
+		border-radius: 100%;
+
+		background-color: rgba(236, 240, 241, .3);
+
+		-webkit-transform: translate(-50%, -50%);
+		-moz-transform: translate(-50%, -50%);
+		-ms-transform: translate(-50%, -50%);
+		-o-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
+	}
+
+	.btn:active:before {
+		width: 120%;
+		padding-top: 120%;
+
+		transition: width .2s ease-out, padding-top .2s ease-out;
+	}
+
+	/* Styles, not important */
+	*, *:before, *:after {
+		box-sizing: border-box;
+	}
+
+	html {
+		position: relative;
+		height: 100%;
+	}
+	h2 {
+		font-weight: normal;
+	}
+	p {
+		font-weight: bold;
+		font-size: 200%;
+	}
+	span {
+		font-size: 250%;
+		font-weight: bold;
+	}
+	.btn.blue {
+		background-color: #2979ff;
+	}
+	.btn.blue:hover, .btn.blue:focus{
+		background-color: #2f69cb;
+	}
 </style>
 <body>
-
-    <input type="button" onclick="SetButton('Play/Pause')" value="Play/Pause" />
-    <input type="button" onclick="SetButton('Volume Up')" value="Volume Up" />
-    <input type="button" onclick="SetButton('Volume Down')" value="Volume Down" />
-    <input type="button" onclick="SetButton('Prev')" value="Prev" />
-    <input type="button" onclick="SetButton('Next')" value="Next" />
-    <div id="centerLayer">
-    </div>
+	<center>
+		<div class="card card-1"><span>Media Controller</span></div>
+		<div id="MainCard" class="card card-4">
+			<button class="btn blue" onclick="SetButton('Play/Pause')" type="button"><span>Play/Pause</span></button>
+			<button class="btn blue" onclick="SetButton('Volume Up')" type="button"><span>Volume Up</span></button>
+			<button class="btn blue" onclick="SetButton('Volume Down')" type="button"><span>Volume Down</span></button>
+			<button class="btn blue" onclick="SetButton('Next')" type="button"><span>Next</span></button>
+			<button class="btn blue" onclick="SetButton('Prev')" type="button"><span>Prev</span></button>
+		</div>
+	</center>
 </body>
+
 <script>
-    function SetButton(name) {
-        document.getElementsByName('ButtonType')[0].setAttribute('value', name);
-        document.getElementById('MainForm').submit();
-    }
+
+	function SetButton(name) {
+		document.getElementsByName('ButtonType')[0].setAttribute('value', name);
+		document.getElementById('MainForm').submit();
+	}
+	var size = document.getElementById('MainCard').offsetHeight;
+	size = size / 15;
+	document.querySelectorAll("span").forEach(function (el) { el.style.fontSize = size });
 </script>
