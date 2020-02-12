@@ -14,7 +14,7 @@ namespace RemoteMusicController
 {
     public class Program
     {
-
+        public static string hostadress { get; } = File.ReadAllText("Hosting.conf");
         public static void Main(string[] args)
         {
             var host = BuildWebHost(args);
@@ -22,7 +22,7 @@ namespace RemoteMusicController
 
         }
         public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args).UseUrls("http://192.168.0.103:5000")//, "http://*:81")//ADD dns?
+            WebHost.CreateDefaultBuilder(args).UseUrls(hostadress)//, "http://*:81")//ADD dns?
                 .UseStartup<Startup>()
                 .UseKestrel()
                 .Build();
