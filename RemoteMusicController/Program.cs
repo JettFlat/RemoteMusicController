@@ -9,16 +9,22 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Net;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
-using SharpDX.DirectInput;
 using SharpDX.XInput;
+using System.Runtime.InteropServices;
 
 namespace RemoteMusicController
 {
     public class Program
     {
+        [DllImport("user32.dll")]
+        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+         
+        [DllImport("kernel32.dll", ExactSpelling = true)]
+        private static extern IntPtr GetConsoleWindow();
         public static string hostadress { get; } = File.ReadAllText("Hosting.conf");
         public static void Main(string[] args)
         {
+            ShowWindow(GetConsoleWindow(), 0); // Скрыть.
             Task.Run(()=>GamepadMediaControllerStart());
             var host = BuildWebHost(args);
             host.Run();
@@ -36,7 +42,6 @@ namespace RemoteMusicController
                 var controller = new Controller(UserIndex.One);
                 if (controller != null)
                 {
-                    //var previousState = controller.GetState();
                     if (controller.IsConnected)
                     {
                         var state = controller.GetState();
