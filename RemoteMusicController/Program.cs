@@ -11,6 +11,7 @@ using System.Net;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using SharpDX.XInput;
 using System.Runtime.InteropServices;
+using System.Diagnostics;
 
 namespace RemoteMusicController
 {
@@ -18,14 +19,14 @@ namespace RemoteMusicController
     {
         [DllImport("user32.dll")]
         private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-         
+
         [DllImport("kernel32.dll", ExactSpelling = true)]
         private static extern IntPtr GetConsoleWindow();
         public static string hostadress { get; } = File.ReadAllText("Hosting.conf");
         public static void Main(string[] args)
         {
             ShowWindow(GetConsoleWindow(), 0); // Скрыть.
-            Task.Run(()=>GamepadMediaControllerStart());
+            Task.Run(() => GamepadMediaControllerStart());
             var host = BuildWebHost(args);
             host.Run();
 
@@ -45,7 +46,7 @@ namespace RemoteMusicController
                     if (controller.IsConnected)
                     {
                         var state = controller.GetState();
-                        if (state.Gamepad.Buttons == GamepadButtonFlags.RightThumb)
+                        if (state.Gamepad.Buttons == (GamepadButtonFlags.Back | GamepadButtonFlags.RightThumb))
                         {
                             KButton.List.FirstOrDefault(x => x.Button == Button.Next).Press();
                             System.Threading.Thread.Sleep(400);
