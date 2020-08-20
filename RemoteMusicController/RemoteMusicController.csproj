@@ -1,8 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
     <ApplicationIcon>MusicNext.ico</ApplicationIcon>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <PublishSingleFile>true</PublishSingleFile>
+    <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
+    <OutputType>Exe</OutputType>
+    <UserSecretsId>f3df41a6-ba68-4122-b2df-a8468d50e000</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

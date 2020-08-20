@@ -22,7 +22,7 @@ namespace RemoteMusicController
 
         [DllImport("kernel32.dll", ExactSpelling = true)]
         private static extern IntPtr GetConsoleWindow();
-        public static string hostadress { get; } = File.ReadAllText("Hosting.conf");
+        public static string hostadress { get; } = GetHostAdress();
         public static void Main(string[] args)
         {
             ShowWindow(GetConsoleWindow(), 0); // Скрыть.
@@ -54,6 +54,16 @@ namespace RemoteMusicController
                     }
                 }
                 System.Threading.Thread.Sleep(100);
+            }
+        }
+        public static string GetHostAdress()
+        {
+            if (File.Exists("Hosting.conf"))
+                return File.ReadAllText("Hosting.conf");
+            else
+            {
+                File.WriteAllText("Hosting.conf", "http://192.168.0.103:5000");
+                return "http://192.168.0.103:5000";
             }
         }
     }
