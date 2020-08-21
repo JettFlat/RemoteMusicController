@@ -1,5 +1,6 @@
 # RemoteMusicController
 Remotely control music or a video player or any program running on your PC and using media buttons from any device on your local network.
+If you are using a gamepad press view button + Right stick buttons for the next track.
 
 Windows only!
 <p align="center">
