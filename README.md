@@ -9,6 +9,7 @@ Windows only!
 
 
 [![Remote Music Controller](https://img.youtube.com/vi/mz37VrHsAJA/0.jpg)](https://www.youtube.com/watch?v=mz37VrHsAJA "Remote Music Controller")
+
 Install:
 1. Run RemoteMusicController.exe
 2. Open Hosting.conf as txt file and replace adress to your local pc address
