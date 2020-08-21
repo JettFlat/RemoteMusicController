@@ -7,6 +7,7 @@ Windows only!
 </p>
 
 Install:
-1. Open Hosting.conf as txt file and replace adress to your local pc address
-2. Run RemoteMusicController.exe
-3. Open your pc adress on your local device.
+1. Run RemoteMusicController.exe
+2. Open Hosting.conf as txt file and replace adress to your local pc address
+3. kill RemoteMusicController.exe process.
+4. Open your pc adress on your local device.
